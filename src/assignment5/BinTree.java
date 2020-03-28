@@ -1,6 +1,5 @@
 package assignment5;
 
-import java.awt.geom.Area;
 import java.util.ArrayList;
 
 public class BinTree {
@@ -117,7 +116,6 @@ public class BinTree {
 	public ArrayList<Node> addToInOrderList() {
 		ArrayList<Node> inOrderList = new ArrayList<Node>();
 		
-		int heightCount=1;
 		Node focusNode = root.left;
 		while (focusNode != null) {
 			if (focusNode.right != null) {
@@ -125,19 +123,16 @@ public class BinTree {
 			}
 			inOrderList.add(0, focusNode);
 			focusNode = focusNode.left;
-			heightCount++;
 		}
 		inOrderList.add(root);
 
 		focusNode = root.right;
-		heightCount=1;
 		while (focusNode != null) {
 			if (focusNode.left != null) {
 				inOrderList.add(focusNode.left);
 			}
 			inOrderList.add(focusNode);
 			focusNode = focusNode.right;
-			heightCount++;
 		}
 		return inOrderList;
 	}
@@ -164,7 +159,10 @@ public class BinTree {
 	}
 	
 	public int inOrderGetSubtreeHeight(Node focusNode) {
-		if(focusNode.left==null&&focusNode.right==null) {
+		if(focusNode==null) {
+			return -1;
+		}
+		else if(focusNode!=null&&focusNode.left==null&&focusNode.right==null) {
 			return 0;
 		}
 		else {
@@ -207,5 +205,7 @@ public class BinTree {
 		System.out.println("Subtree height at pos 6 (leaf): "+heightAt6);
 		int heightAt1=binTree.inOrderGetSubtreeHeight(binTree.inOrderGetByPos(1));
 		System.out.println("Subtree height at pos 1: "+heightAt1);
+		int heightAt100=binTree.inOrderGetSubtreeHeight(binTree.inOrderGetByPos(100));
+		System.out.println("Subtree height at pos 100: "+heightAt100);
 	}
 }
